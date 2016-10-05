@@ -1,8 +1,6 @@
-//server.js
-
 //Express
-var express 		 		= require('express');
-var app             = express(); 
+var express 	= require('express');
+var app         = express(); 
 app.use(express.static(process.cwd() + '/public'));
 
 //handlebars
@@ -33,17 +31,34 @@ app.use('/', routes);
 var PORT = process.env.PORT || 3003;
 app.listen(PORT);
 
-//Does this take me straight to the home page?
-app.get('/', function (req, res) {
-    app.render('index');
-});
+var models  = require('./models');
+
+// extract our sequelize connection from the models object, to avoid confusion
+var sequelizeConnection = models.sequelizedburger;
+
+// We run this query so that we can drop our tables even though they have foreign keys
+sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
+
+.then(function(){
+	return sequelizeConnection.sync({force:true})
+})
+
+// only when those tables are made, do we want to run the next set of functions
+// .then(function(){
+// 	return models.Manager.create(
+// 		{
+
+// //Does this take me straight to the home page?
+// app.get('/', function (req, res) {
+//     app.render('index');
+// });
 
 //trying to add a burger
-app.post('/create', function(req,res){
-    connection.query('INSERT INTO burgers (burger_name) VALUES (?)', [req.body.burger], function(err, result) {
-      if (err) throw err;
-      res.redirect('/');
-    });
-});
+// app.post('/create', function(req,res){
+//     connection.query('INSERT INTO burgers (burger_name) VALUES (?)', [req.body.burger], function(err, result) {
+//       if (err) throw err;
+//       res.redirect('/');
+//     });
+// });
 
 
