@@ -1,11 +1,23 @@
 'use strict';
-
+// 1. Fileseeker: let's us read in the models
 var fs        = require('fs');
+
+// 2. Path: let's us find the models with _dirname
 var path      = require('path');
+
+// 3. Sequelize (of course)
 var Sequelize = require('sequelize');
+
+// 4. grab the basename (index.js)
 var basename  = path.basename(module.filename);
+
+// 5. determine the environment 
 var env       = process.env.NODE_ENV || 'development';
+
+// 6. Our config file
 var config    = require(__dirname + '/../config/config.json')[env];
+
+// 7. a db object to save our models
 var db        = {};
 
 if (config.use_env_variable) {
@@ -14,6 +26,7 @@ if (config.use_env_variable) {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+// This code finds every file in the models directory
 fs
   .readdirSync(__dirname)
   .filter(function(file) {

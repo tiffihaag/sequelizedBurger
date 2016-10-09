@@ -40,9 +40,5 @@ router.delete('/burgers/delete/:burger_name', function (req, res) {
 module.exports = router;
 
 
-//for if the user doesn't hit the right place
-// app.use('/*', function(req,res){
-//    res.send("<h1>Not hungry?</h1>");
-// });
 
 
