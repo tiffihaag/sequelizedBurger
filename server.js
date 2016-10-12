@@ -31,7 +31,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 //Controllerjs
 //----------------------------------------------------
-var routes = require('./controllers/burgers_controller.js');
+var routes = require('./models/index.js');
 app.use('/', routes);
 
 var PORT = process.env.PORT || 3003;
@@ -50,14 +50,5 @@ sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
 
 .then(function(){
 	return sequelizeConnection.sync({force:true})
-})
+});
 
-// Create our burger in a .then callback
-//----------------------------------------------------
-.then(function(){
-	return models.index.create(
-		{
-			// Burger the user entered
-			burger_name: [req.body.burger], 
-			})
-		});
