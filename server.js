@@ -31,7 +31,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 //Controllerjs
 //----------------------------------------------------
-var routes = require('./models/index.js');
+var routes = require('./controllers/burgers_controller.js');
 app.use('/', routes);
 
 var PORT = process.env.PORT || 3003;
