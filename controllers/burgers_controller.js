@@ -1,11 +1,10 @@
 var models  = require('../models');
 var express = require('express');
 var router = express.Router();
-// edit burger model to match sequelize
-var Burger = require('../models/')["burgers"];
 
-router.get('/burgers', function(req, res) {
-	Burger.findAll({
+router.get('burgers', function(req, res) {
+	models.burgers.findAll({
+    include: [ models.burgers ]
   })
 	.then(function(burgers) {
 		res.render('burgers/index', {
@@ -13,8 +12,6 @@ router.get('/burgers', function(req, res) {
     })
   })
 });
-
-
 
 module.exports = router;
 

@@ -1,11 +1,13 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var burger = sequelize.define("burger", {
-    name: DataTypes.STRING,
-    devoured: { type: DataTypes.BOOLEAN, defaultValue: false }
-  })
+ var burgers = sequelize.define("burgers", {
+   name: DataTypes.STRING,
+   devoured: { type: DataTypes.BOOLEAN, defaultValue: false }
+ });
+ return burgers;
 };
+
   // }, {
   //   classMethods: {
   //     associate: function(models) {
