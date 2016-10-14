@@ -1,13 +1,12 @@
-var models  = require('../models');
+var burgers  = require('../models')["burgers"];
+var models  = require('../models/burgers');
 var express = require('express');
 var router = express.Router();
 
 router.get('burgers', function(req, res) {
-	models.burgers.findAll({
-    include: [ models.burgers ]
-  })
+	models.burgers.findAll()
 	.then(function(burgers) {
-		res.render('burgers/index', {
+		res.render('index', {
       	burgers: burgers
     })
   })
